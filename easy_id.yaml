@@ -1,0 +1,25 @@
+# encoding: utf-8
+---
+patch_double_pinyin_mspy:
+  __include: patch
+  speller/alphabet:
+    "zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA;"
+
+patch_terra_pinyin:
+  __include: patch
+  speller/alphabet: >-
+      zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA-;/<,>\
+  speller/initials: >-
+      zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA
+
+patch:
+  schema/dependencies/@next: easy_id
+  engine/translators/@next: table_translator@easy_id
+  easy_id:
+    __include: easy_id.schema:/translator
+    enable_completion: true
+    enable_sentence: true
+    initial_quality: -1
+  recognizer/patterns/uppercase: ''
+  speller/alphabet:
+    __include: easy_id.schema:/speller/alphabet
